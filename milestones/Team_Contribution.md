@@ -6,6 +6,7 @@
 * Nishant Kumar
 * Rahul Yadav
 * Neeraj
+* Kisalay
 
 ## **Roles and Responsibilities**
 
@@ -42,6 +43,15 @@ Neeraj focuses on deployment and technical system execution, including:
 * Model deployment and integration
 * Backend or system setup for execution
 * Ensuring scalability and operational functionality
+
+### **4. Kisalay- Technical Implementation Team**
+
+Kisalay plays a key role in bridging development and deployment, ensuring the project runs efficiently in a real-world environment. His responsibilities include:
+
+* Designing and managing the MLOps pipeline for smooth model lifecycle management
+* Implementing model versioning, monitoring, and performance tracking
+* Handling CI/CD integration for automated testing and deployment
+* Ensuring system reliability, scalability, and optimization
 
 ## **Collaborative Responsibilities**
 
