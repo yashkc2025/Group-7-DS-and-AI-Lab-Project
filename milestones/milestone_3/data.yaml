@@ -1,0 +1,10 @@
+path: ./dataset 
+train: images/train
+val: images/val
+
+names:
+  0: Pothole
+  1: Others
+  2: Longitudinal
+  3: Alligator
+  4: Transverse
