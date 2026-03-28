@@ -1,1 +1,4 @@
-Reduce mAp to 0.57
+Project Changelog
+1.  Metric Adjustment: Reduced target mAP to 0.57 to reflect realistic performance on the Indian RDD2022 subset.
+2.  Evidence Refinement: Added comparative data (0.62 vs. 0.55 mAP) and academic references to justify the 15–25% performance drop claim.
+3.  Strategy Expansion: Integrated a 3-Level Hierarchical Classification framework (Defect/No Defect, Pothole/Crack, and Crack Subtype) to enhance detection robustness.

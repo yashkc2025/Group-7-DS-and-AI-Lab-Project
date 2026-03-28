@@ -78,13 +78,14 @@ The official RDD2022 baseline uses YOLOv5s, achieving mAP@0.5 \= 0.62 overall, b
 
 ## **Critical Limitations**
 
-•       Domain Bias: Models trained on Japanese or US roads perform poorly on Indian roads, with a 15-25% drop in mAP. Monsoon-related wetness, shadow patterns, and asphalt textures are largely unrepresented in existing training data.
+•       Domain Bias: Models trained on Japanese or US roads perform poorly on Indian roads, with a 15-25% drop in mAP. Monsoon-related wetness, shadow patterns, and asphalt textures are largely unrepresented in existing training data. This performance degradation is evidenced by the following benchmarks:
 
-•       Edge Deployment: Most published solutions rely on GPU hardware
-
-•       Small Object Detection: Potholes smaller than 100px are frequently missed, particularly when there's motion blur or partial occlusion.
-
-•       India-Specific Gap: No existing work specifically fine-tunes on the RDD2022 Indian subset, which contains over 7,000 images.
+* **Baseline Disparity:** The official RDD2022 baseline (YOLOv5s) achieves a global mAP@0.5 of **0.62**, yet this figure plunges to **0.55** when isolated to the Indian subset.  
+* **Causal Factors:** The drop is attributed to unrepresented variables such as monsoon-related wetness, high-contrast tropical shadow patterns, and diverse asphalt textures.  
+* **Supporting Evidence:** These findings are corroborated by domain adaptation studies comparing Indian vs. global datasets and the technical reports from the **CRDDC'22** competition.  
+  •       Edge Deployment: Most published solutions rely on GPU hardware  
+  •       Small Object Detection: Potholes smaller than 100px are frequently missed, particularly when there's motion blur or partial occlusion.  
+  •       India-Specific Gap: No existing work specifically fine-tunes on the RDD2022 Indian subset, which contains over 7,000 images.
 
 ## **The Opportunity**
 
@@ -130,6 +131,14 @@ To ensure *cross-region generalisation* and long-term system reliability, we wil
 * **Stratified K-Fold Validation:** We utilize an 80/20 train/test split, ensuring that images from different Indian cities within the RDD2022 set are proportionally represented in both segments to prevent overfitting to a single location.  
 * **Ablation Studies:** We will systematically disable one key technical improvement at a time (e.g., training without monsoon augmentation) to quantify and report exactly which technique contributes most to the expected 15% mAP boost.  
 * **Automated CI/CD Pipeline:** The MLOps framework will be used to automatically re-test the model against the defined Success Criteria (mAP, Precision, Recall, FPS) every time a new optimization or code change is pushed.
+
+## **Hierarchical Detection Logic**
+
+To minimize the false positives often caused by India's complex road textures, we will implement a multi-stage classification framework:
+
+* **Level 1 (Detection):** **Defect vs. No Defect.** A binary filter to distinguish road damage from non-damage features like shadows or oil spills.  
+* **Level 2 (Classification):** **Pothole vs. Crack.** Categorizing the detected region into its primary damage type.  
+* **Level 3 (Sub-typing):** **Longitudinal vs. Transverse.** Providing granular structural data for "In Scope" crack types.
 
 # **8\. Evidence Plan \- Proving Success**
 
