@@ -1,0 +1,54 @@
+CHANGELOG
+
+1. Dataset Split & Statistics
+
+* Updated dataset split to precise stratified values:
+  • Training: 80.04%
+  • Validation: 10.03%
+  • Test: 9.93%
+* Added total dataset size:
+  • 7,706 images
+  • 8,203 bounding boxes
+
+2. Class Consolidation (4 vs. 5 Classes)
+
+* Removed "Others" category
+* Final model uses 4 classes:
+  • Longitudinal
+  • Transverse
+  • Alligator
+  • Pothole
+* Verified mapping consistency with FINAL_CLASS_MAP in preprocessing
+
+3. Model Strategy & Unified Grid
+
+* Replaced YOLOv8n debugging approach with Unified Experiment Grid
+* Treated YOLOv8n, YOLOv8s, YOLOv8m, YOLOv8l as hyperparameter variants
+* Added experiments with resolutions:
+  • 640x640 (standard)
+  • 896x896
+
+4. Hyperparameters & Augmentation
+
+* Mosaic probability updated: 1.0 → 0.6
+* Early stopping patience: 15 → 20 epochs
+* Added augmentation parameters:
+  • HSV (Hue, Saturation, Value)
+  • Spatial (Translate, Scale)
+* Values sourced from TRAINING_COMMON_ARGS
+
+5. Results & Findings
+
+* Identified class imbalance:
+  • Transverse cracks = 1.6% of dataset
+* Highlighted evaluation metrics:
+  • mAP@0.5
+  • mAP@0.5:0.95
+
+6. Artifacts & Storage
+
+* Updated storage paths from:
+  • runs/detect/
+  to:
+  • /content/artifacts/milestone4/
+* Applies to training runs, reports, and exports
