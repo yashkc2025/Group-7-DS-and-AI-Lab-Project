@@ -47,7 +47,6 @@ The repository is structured to separate experimental research from production-r
 #### Clone the repository
 ```
 git clone https://github.com/yashkc2025/Group-7-DS-and-AI-Lab-Project
-
 cd Group-7-DS-and-AI-Lab-Project
 ```
 #### Virtual Environment Setup
@@ -58,11 +57,9 @@ It is **strongly recommended** to use a Python virtual environment to isolate pr
 
 ```
 # On Windows
-
 python -m venv .venv
 
 # On macOS/Linux
-
 python3 -m venv .venv
 ```
 
@@ -70,15 +67,12 @@ python3 -m venv .venv
 
 ```
 # On Windows (PowerShell)
-
 .\.venv\Scripts\Activate.ps1
 
 # On Windows (Command Prompt)
-
 .venv\Scripts\activate.bat
 
 # On macOS/Linux
-
 source .venv/bin/activate
 ```
 
@@ -111,9 +105,13 @@ The model was evaluated against a held-out test set from the RDD2022-India datas
 | Name | Email |
 | :--- | :--- |
 | **Yash Kumar** | [yash.email@example.com](mailto:yash.email@example.com)
-| **Neeraj Yadav** | [neeraj.email@example.com](mailto:neeraj.email@example.com)
+| **Neeraj Yadav** | 21f1005729@ds.study.iitm.ac.in
 | **Rahul Yadav** | [rahul.email@example.com](mailto:rahul.email@example.com)
 | **Kisalay Pan** | [kisalay.email@example.com](mailto:kisalay.email@example.com)
 | **Nishant Kumar** | [nishant.email@example.com](mailto:nishant.email@example.com)
 
+## ⚖️ License
 
+> This project is part of the **IITM Data Science and AI Lab** curriculum. 
+
+All rights reserved to the authors and the Indian Institute of Technology Madras (IITM). Use of this codebase is restricted to academic evaluation and non-commercial research purposes.
