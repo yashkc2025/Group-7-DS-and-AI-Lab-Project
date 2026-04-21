@@ -6,7 +6,7 @@
 ## 📌 Executive Summary
 This project implements a high-performance computer vision pipeline designed for the autonomous monitoring of Indian road infrastructure. Utilizing the state-of-the-art **YOLOv11** architecture, the system identifies and categorizes 5 types of structural distress with a focus on real-time edge deployment.
 
-### Key Highlights:
+### Key Features:
 * **mAP50:** 0.48 (Optimized for India-specific RDD2022 dataset).
 * **State-of-the-Art Architecture:** Leverages **YOLOv11l** with C3k2/C2PSA blocks for high-precision detection.
 * **Image Enhancement:** Integrated **CLAHE** preprocessing to handle the unique lighting/dust conditions of Indian roads.
@@ -51,35 +51,40 @@ cd road-damage-detection
 
 It is **strongly recommended** to use a Python virtual environment to isolate project dependencies and maintain environment stability.
 
-##### Create Virtual Environment
+#### Create Virtual Environment
 
 * On Windows
+
 python -m venv .venv
 
 * On macOS/Linux
+
 python3 -m venv .venv
-##### Activate Virtual Environment
-Bash
+#### Activate Virtual Environment
+
 * On Windows (PowerShell)
+
 .\.venv\Scripts\Activate.ps1
 
 * On Windows (Command Prompt)
+
 .venv\Scripts\activate.bat
 
 * On macOS/Linux
+
 source .venv/bin/activate
 
-#### Install dependencies
+## Install dependencies
 pip install -r requirements.txt
 
-#### Initialize project sub-directories
+## Initialize project sub-directories
 python src/init_folders.py
-### 2. Deployment (API)
+## 2. Deployment (API)
 Start the inference server locally:
 uvicorn deployment.server:app --host 0.0.0.0 --port 8000
 ## 📊 Evaluation & Metrics
 The model was evaluated against a held-out test set from the RDD2022-India dataset.
 * **Primary Metric:** mAP50 = 0.542
 * **Optimizations:**
-* **CLAHE:** Applied to normalize lighting conditions in 180°C Indian environments.
-* **INT8 Quantization:** Achieved a 70% reduction in model size while maintaining 98.5% of FP32 accuracy.
+  * **CLAHE:** Applied to normalize lighting conditions in 180°C Indian environments.
+  * **INT8 Quantization:** Achieved a 70% reduction in model size while maintaining 98.5% of FP32 accuracy.
