@@ -1,60 +1,81 @@
 import os
 import sys
-import cv2
+import pandas as pd
+from datetime import datetime
 from ultralytics import YOLO
+from PIL import Image
+from PIL.ExifTags import TAGS, GPSTAGS
 
-def run_prediction(image_source, weights_path='models/best.pt'):
-    """
-    Runs inference on a single image or a folder of images.
-    :param image_source: Path to an image or directory of images.
-    :param weights_path: Path to the trained .pt weights.
-    """
-    # 1. Load Model
-    if not os.path.exists(weights_path):
-        print(f"❌ Error: Model weights not found at {weights_path}")
-        return
+class MunicipalReporter:
+    def __init__(self, weights_path='models/best.pt'):
+        self.model = YOLO(weights_path)
+        self.output_csv = 'outputs/csv/municipal_road_report.csv'
 
-    model = YOLO(weights_path)
-    print(f"🧠 Model loaded from {weights_path}")
+    def get_gps_data(self, image_path):
+        """Extracts GPS coordinates or returns 'DATA_NOT_FOUND'."""
+        try:
+            image = Image.open(image_path)
+            exif_data = image._getexif()
+            if not exif_data:
+                return "DATA_NOT_FOUND", "DATA_NOT_FOUND", "MISSING"
 
-    # 2. Run Inference
-    # stream=True handles memory efficiently for large folders
-    results = model.predict(
-        source=image_source,
-        conf=0.25,        # Confidence threshold
-        save=False,       # We will handle saving manually for custom naming
-        imgsz=640,
-        device=0          # Run on GPU 0
-    )
+            gps_info = {}
+            for tag, value in exif_data.items():
+                decoded = TAGS.get(tag, tag)
+                if decoded == "GPSInfo":
+                    for t in value:
+                        sub_tag = GPSTAGS.get(t, t)
+                        gps_info[sub_tag] = value[t]
 
-    # 3. Process and Save Results
-    output_dir = 'outputs/samples'
-    os.makedirs(output_dir, exist_ok=True)
+            if 'GPSLatitude' in gps_info and 'GPSLongitude' in gps_info:
+                def to_decimal(coords, ref):
+                    d, m, s = [float(x) for x in coords]
+                    decimal = d + (m / 60.0) + (s / 3600.0)
+                    if ref in ['S', 'W']: decimal = -decimal
+                    return round(decimal, 6)
 
-    print(f"🔍 Processing detections for: {image_source}")
-    
-    for i, r in enumerate(results):
-        # Plot the detections on the original image
-        annotated_frame = r.plot()
-        
-        # Extract original filename or create one
-        if hasattr(r, 'path'):
-            base_name = os.path.basename(r.path)
-        else:
-            base_name = f"detection_{i}.jpg"
+                lat = to_decimal(gps_info['GPSLatitude'], gps_info['GPSLatitudeRef'])
+                lon = to_decimal(gps_info['GPSLongitude'], gps_info['GPSLongitudeRef'])
+                return lat, lon, "VALID"
+        except Exception:
+            pass
+        return "DATA_NOT_FOUND", "DATA_NOT_FOUND", "MISSING"
+
+    def run_inference(self, source_path):
+        results = self.model.predict(source=source_path, conf=0.25, imgsz=640)
+        report_data = []
+
+        for r in results:
+            img_name = os.path.basename(r.path)
+            lat, lon, status = self.get_gps_data(r.path)
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             
-        save_path = os.path.join(output_dir, f"pred_{base_name}")
-        
-        # Save using OpenCV
-        cv2.imwrite(save_path, annotated_frame)
-        print(f"✅ Saved detection to: {save_path}")
+            counts = {'Pothole': 0, 'Crack': 0}
+            for box in r.boxes:
+                cls_name = self.model.names[int(box.cls)]
+                if 'Pothole' in cls_name:
+                    counts['Pothole'] += 1
+                else:
+                    counts['Crack'] += 1
+
+            report_data.append({
+                'File_Name': img_name,
+                'Latitude': lat,
+                'Longitude': lon,
+                'Metadata_Status': status,  # Explicitly flags missing data
+                'Total_Issues': counts['Pothole'] + counts['Crack'],
+                'Pothole_Count': counts['Pothole'],
+                'Crack_Count': counts['Crack'],
+                'Urgency_Level': "HIGH" if counts['Pothole'] > 0 else "LOW",
+                'Timestamp': timestamp
+            })
+            r.save(filename=os.path.join('outputs/samples', f"report_{img_name}"))
+
+        df = pd.DataFrame(report_data)
+        df.to_csv(self.output_csv, index=False)
+        print(f"✅ Report Generated. Metadata Status: {df['Metadata_Status'].value_counts().to_dict()}")
 
 if __name__ == "__main__":
-    # Check if a path was provided via command line
-    if len(sys.argv) > 1:
-        target = sys.argv[1]
-    else:
-        # Default fallback for testing
-        target = 'data/raw' 
-        
-    run_prediction(target)
+    reporter = MunicipalReporter()
+    target = sys.argv[1] if len(sys.argv) > 1 else 'data/raw'
+    reporter.run_inference(target)
