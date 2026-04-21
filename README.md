@@ -7,9 +7,10 @@
 This project implements a high-performance computer vision pipeline designed for the autonomous monitoring of Indian road infrastructure. Utilizing the state-of-the-art **YOLOv11** architecture, the system identifies and categorizes 5 types of structural distress with a focus on real-time edge deployment.
 
 ### Key Highlights:
-* **mAP50:** 0.542 (Optimized for India-specific RDD2022 dataset).
-* **Hardware Agnostic:** Optimized for both Dual T4 GPUs (Training) and CPU-based Edge devices (Inference).
-* **Production Ready:** Full FastAPI integration for mobile-client communication.
+* **mAP50:** 0.48 (Optimized for India-specific RDD2022 dataset).
+* **State-of-the-Art Architecture:** Leverages **YOLOv11l** with C3k2/C2PSA blocks for high-precision detection.
+* **Image Enhancement:** Integrated **CLAHE** preprocessing to handle the unique lighting/dust conditions of Indian roads.
+* **Production API:** Scalable FastAPI implementation for real-time mobile/web integration.
 
 ---
 
@@ -31,11 +32,42 @@ The repository is structured to separate experimental research from production-r
     ├── csv/            # Performance logs
     └── plots/          # Confusion Matrix, PR Curves, F1-Score
 ```
+## 📂 Key Folders Explained
+| Folder | Purpose |
+| :--- | :--- |
+| **`data/`** | Contains dataset configurations (`data.yaml`) and preprocessing logic. |
+| **`src/`** | The "Engine" of the project; contains modular Python scripts for training and evaluation. |
+| **`deployment/`** | Production-ready files including the FastAPI `server.py` and API test scripts. |
+| **`models/`** | Stores final serialized weights in `.pt`, `.onnx`, and OpenVINO formats. |
+| **`outputs/`** | **Auto-generated** results including performance CSVs, PR Curves, and detection samples. |
+| **`notebooks/`** | Archival milestone notebooks documenting the research and EDA phases. |
+
 ## 🚀 Installation & Setup
 ### 1. Environment Initialization
 #### Clone the repository
 git clone [https://github.com/your-username/road-damage-detection.git](https://github.com/your-username/road-damage-detection.git)
 cd road-damage-detection
+#### Virtual Environment Setup
+
+It is **strongly recommended** to use a Python virtual environment to isolate project dependencies and maintain environment stability.
+
+##### Create Virtual Environment
+
+* On Windows
+python -m venv .venv
+
+* On macOS/Linux
+python3 -m venv .venv
+##### Activate Virtual Environment
+Bash
+* On Windows (PowerShell)
+.\.venv\Scripts\Activate.ps1
+
+* On Windows (Command Prompt)
+.venv\Scripts\activate.bat
+
+* On macOS/Linux
+source .venv/bin/activate
 
 #### Install dependencies
 pip install -r requirements.txt
