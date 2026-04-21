@@ -56,35 +56,49 @@ It is **strongly recommended** to use a Python virtual environment to isolate pr
 
 #### Create Virtual Environment
 
-* On Windows
+```
+# On Windows
 
 python -m venv .venv
 
-* On macOS/Linux
+# On macOS/Linux
 
 python3 -m venv .venv
+```
+
 #### Activate Virtual Environment
 
-* On Windows (PowerShell)
+```
+# On Windows (PowerShell)
 
 .\.venv\Scripts\Activate.ps1
 
-* On Windows (Command Prompt)
+# On Windows (Command Prompt)
 
 .venv\Scripts\activate.bat
 
-* On macOS/Linux
+# On macOS/Linux
 
 source .venv/bin/activate
+```
 
 ## Install dependencies
+
+```
 pip install -r requirements.txt
+```
 
 ## Initialize project sub-directories
+```
 python src/init_folders.py
+```
+
 ## 2. Deployment (API)
 Start the inference server locally:
+```
 uvicorn deployment.server:app --host 0.0.0.0 --port 8000
+```
+
 ## 📊 Evaluation & Metrics
 The model was evaluated against a held-out test set from the RDD2022-India dataset.
 * **Primary Metric:** mAP50 = 0.48
