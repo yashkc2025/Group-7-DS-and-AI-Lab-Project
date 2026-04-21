@@ -45,8 +45,11 @@ The repository is structured to separate experimental research from production-r
 ## 🚀 Installation & Setup
 ### 1. Environment Initialization
 #### Clone the repository
+```
 git clone https://github.com/yashkc2025/Group-7-DS-and-AI-Lab-Project
+
 cd Group-7-DS-and-AI-Lab-Project
+```
 #### Virtual Environment Setup
 
 It is **strongly recommended** to use a Python virtual environment to isolate project dependencies and maintain environment stability.
