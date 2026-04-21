@@ -30,8 +30,8 @@ The repository is structured to separate experimental research from production-r
 └── outputs/            # Automated Artifact Storage
     ├── csv/            # Performance logs
     └── plots/          # Confusion Matrix, PR Curves, F1-Score
-🚀 Installation & Setup
-1. Environment Initialization
+## 🚀 Installation & Setup
+### 1. Environment Initialization
 # Clone the repository
 git clone [https://github.com/your-username/road-damage-detection.git](https://github.com/your-username/road-damage-detection.git)
 cd road-damage-detection
@@ -41,10 +41,10 @@ pip install -r requirements.txt
 
 # Initialize project sub-directories
 python src/init_folders.py
-2. Deployment (API)
+### 2. Deployment (API)
 Start the inference server locally:
 uvicorn deployment.server:app --host 0.0.0.0 --port 8000
-📊 Evaluation & Metrics
+## 📊 Evaluation & Metrics
 The model was evaluated against a held-out test set from the RDD2022-India dataset.
 Primary Metric: mAP50 = 0.542
 Optimizations: * CLAHE: Applied to normalize lighting conditions in 180°C Indian environments.
