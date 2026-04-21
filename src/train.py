@@ -21,7 +21,7 @@ def train_pipeline():
         epochs=150,           # Max epochs; patience will fire early
         imgsz=640,
         batch=16,             # Optimized for T4 VRAM
-        device=0,             # Forced single-GPU for stability at the hospital
+        device=[0,1],         
         patience=25,          # Sweet spot for convergence
         project=OUTPUT_DIR,
         name='v11l_640_stage1',
