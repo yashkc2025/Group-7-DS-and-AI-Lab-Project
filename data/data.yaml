@@ -1,0 +1,6 @@
+train: ../data/processed/train/images
+val: ../data/processed/valid/images
+test: ../data/processed/test/images
+
+nc: 5
+names: ['Longitudinal Crack', 'Transverse Crack', 'Alligator Crack', 'Pothole', 'Other']
