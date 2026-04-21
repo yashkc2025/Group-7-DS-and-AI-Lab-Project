@@ -45,8 +45,8 @@ The repository is structured to separate experimental research from production-r
 ## 🚀 Installation & Setup
 ### 1. Environment Initialization
 #### Clone the repository
-git clone [https://github.com/your-username/road-damage-detection.git](https://github.com/your-username/road-damage-detection.git)
-cd road-damage-detection
+git clone https://github.com/yashkc2025/Group-7-DS-and-AI-Lab-Project
+cd Group-7-DS-and-AI-Lab-Project
 #### Virtual Environment Setup
 
 It is **strongly recommended** to use a Python virtual environment to isolate project dependencies and maintain environment stability.
@@ -84,7 +84,19 @@ Start the inference server locally:
 uvicorn deployment.server:app --host 0.0.0.0 --port 8000
 ## 📊 Evaluation & Metrics
 The model was evaluated against a held-out test set from the RDD2022-India dataset.
-* **Primary Metric:** mAP50 = 0.542
+* **Primary Metric:** mAP50 = 0.48
 * **Optimizations:**
   * **CLAHE:** Applied to normalize lighting conditions in 180°C Indian environments.
   * **INT8 Quantization:** Achieved a 70% reduction in model size while maintaining 98.5% of FP32 accuracy.
+
+## 👥 Team Members
+
+| Name | Email |
+| :--- | :--- |
+| **Yash Kumar** | [yash.email@example.com](mailto:yash.email@example.com)
+| **Neeraj Yadav** | [neeraj.email@example.com](mailto:neeraj.email@example.com)
+| **Rahul Yadav** | [rahul.email@example.com](mailto:rahul.email@example.com)
+| **Kisalay Pan** | [kisalay.email@example.com](mailto:kisalay.email@example.com)
+| **Nishant Kumar** | [nishant.email@example.com](mailto:nishant.email@example.com)
+
+
