@@ -22,7 +22,7 @@ The repository is structured to separate experimental research from production-r
 ├── deployment/         # Production API (FastAPI) & Client testing
 ├── docs/               # Technical reports, Manuals, and PPTX
 ├── models/             # Serialized weights (PyTorch, ONNX, OpenVINO)
-├── notebooks/          # Milestone history and EDA
+├── milestones/          # Milestone history and EDA
 ├── src/                # Core Modular Logic
 │   ├── init_folders.py # Environment setup
 │   ├── preprocess.py   # CLAHE & Spatial augmentations
@@ -40,7 +40,7 @@ The repository is structured to separate experimental research from production-r
 | **`deployment/`** | Production-ready files including the FastAPI `server.py` and API test scripts. |
 | **`models/`** | Stores final serialized weights in `.pt`, `.onnx`, and OpenVINO formats. |
 | **`outputs/`** | **Auto-generated** results including performance CSVs, PR Curves, and detection samples. |
-| **`notebooks/`** | Archival milestone notebooks documenting the research and EDA phases. |
+| **`milestones/`** | Archival milestone notebooks documenting the research and EDA phases. |
 
 ## 🚀 Installation & Setup
 ### 1. Environment Initialization
