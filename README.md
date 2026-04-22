@@ -7,7 +7,7 @@
 This project implements a high-performance computer vision pipeline designed for the autonomous monitoring of Indian road infrastructure. Utilizing the state-of-the-art **YOLOv11** architecture, the system identifies and categorizes 5 types of structural distress with a focus on real-time edge deployment.
 
 ### Key Features:
-* **mAP50:** 0.48 (Optimized for India-specific RDD2022 dataset).
+* **mAP50:** 0.46 (Optimized for India-specific RDD2022 dataset).
 * **State-of-the-Art Architecture:** Leverages **YOLOv11l** with C3k2/C2PSA blocks for high-precision detection.
 * **Image Enhancement:** Integrated **CLAHE** preprocessing to handle the unique lighting/dust conditions of Indian roads.
 * **Production API:** Scalable FastAPI implementation for real-time mobile/web integration.
